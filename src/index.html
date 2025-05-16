@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sommerspiele 2025</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- Welcome Modal -->
+    <div id="welcomeModal" class="modal">
+      <div class="modal-content">
+        <h2>🎮 Willkommen zu Chris seinem Sommerspiel!</h2>
+        <p>Passwort eingeben, dann loslegen!</p>
+        <input
+          type="password"
+          id="passwordInput"
+          placeholder="Enter password"
+          style="padding: 10px; font-size: 16px; width: 80%; margin-top: 10px"
+        />
+        <br /><br />
+        <button id="startButton" onclick="startGame()" disabled>
+          Start Game
+        </button>
+      </div>
+    </div>
+
+    <!-- Button Press Game -->
+    <main id="game" style="display: none">
+      <h1>Aufwärmübung!</h1>
+      <p>
+        Abwechselnd die Knöpfe drücken, bei Fehler musst du neu anfangen! Ziel
+        sind <strong>69</strong>.
+      </p>
+      <div class="button-group">
+        <button id="button1" onclick="buttonPressed(1)">Knopf 1</button>
+        <button id="button2" onclick="buttonPressed(2)">Knopf 2</button>
+      </div>
+
+      <p id="counterDisplay">Stand: 0</p>
+      <p id="status"></p>
+    </main>
+    <!-- Word Puzzle Game -->
+    <div id="wordGame" style="display: none">
+      <h2>🧩 Jeder kennt's, paar haben's intuss</h2>
+      <p>Forme ein Wort mit den Buchstaben</p>
+      <div id="letterContainer"></div>
+      <p>Current Word: <span id="currentWordDisplay">_ _ _ _ _</span></p>
+      <p id="wordStatus"></p>
+      <div style="margin-top: 20px">
+        <button id="resetWordButton" onclick="resetWordGame()">
+          🔄 Zurücksetzen
+        </button>
+      </div>
+    </div>
+
+    <!-- Flappy Egg Game -->
+    <div id="flappyGame" style="display: none">
+      <h2>🐤 Im Ei ist das süßeste Küken überhaupt 🥺</h2>
+      <p>Halte das Ei am Leben für 15 Sekunden!</p>
+      <div id="flappyContainer">
+        <div id="flappyEgg">🥚</div>
+      </div>
+      <p id="flappyStatus"></p>
+      <div style="margin-top: 15px">
+        <button id="flappyRestartButton" onclick="restartFlappyGame()">
+          🔁 Neustart
+        </button>
+      </div>
+    </div>
+
+    <!-- Guess the Weight Game -->
+    <div id="weightGame" style="display: none">
+      <h2>⚖️ Heute wird nach Gewicht bezahlt!</h2>
+      <p>
+        Jeder Gegenstand wiegt was, gebe das Gesamtgewicht in Kilogramm an (auf
+        5kg genau).
+      </p>
+      <img
+        id="weightImage"
+        src="weight.jpeg"
+        alt="Weight Item"
+        style="
+          width: 80%;
+          max-width: 200px;
+          border-radius: 10px;
+          box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+          margin: 15px auto;
+        "
+      />
+
+      <input
+        type="number"
+        id="weightInput"
+        placeholder="Gewicht in kg"
+        style="padding: 10px; font-size: 16px; width: 80%; max-width: 200px"
+      />
+      <button onclick="submitWeightGuess()">Schätzen</button>
+
+      <p id="weightHint" style="margin-top: 15px; font-size: 18px"></p>
+    </div>
+
+    <!-- Draw a Circle Game -->
+    <div id="circleGame" style="display: none">
+      <h2>⭕ Wer hat das ruhigste Händchen?</h2>
+      <p>Zeichne einen Kreis, der minimum 92% perfekt ist!</p>
+      <canvas
+        id="circleCanvas"
+        width="300"
+        height="300"
+        style="border: 2px solid #aaa; border-radius: 8px; touch-action: none"
+      ></canvas>
+      <br />
+      <button onclick="checkCircle()">Abschicken</button>
+      <p id="circleStatus"></p>
+    </div>
+
+    <!-- Rock Paper Scissors Game -->
+    <div id="rpsGame" style="display: none">
+      <h2>✊✋✌️ Schnigg, Schnagg, Schnugg</h2>
+      <p>Spiele den allseits beliebten klassiker, gegen den Zufall selbst!</p>
+      <div style="margin: 20px 0">
+        <button onclick="playRPS('stein')">🪨 Stoi</button>
+        <button onclick="playRPS('papier')">📄 Babbier</button>
+        <button onclick="playRPS('schere')">✂️ Scheer</button>
+      </div>
+      <p id="rpsStatus"></p>
+      <p id="rpsScore"></p>
+    </div>
+
+    <!-- Number Sorting Game -->
+    <div id="puzzleGame" style="display: none">
+      <h2>🧩 Kannsu rechnen?</h2>
+      <p>
+        Jeder Knopf hat eine kleine Rechenaufgabe, das Ergebnis ist der Wert,
+        den es zu sortieren gilt. Es geht von 1 - 5!
+      </p>
+      <ul id="puzzleList"></ul>
+      <p id="puzzleStatus"></p>
+    </div>
+
+    <!-- Star Rating Challenge -->
+    <div id="starGame" style="display: none">
+      <h2>Bewerte dieses Spiel!</h2>
+      <p>Mach bloß koin scheiß edda!</p>
+      <div id="starContainer"></div>
+      <p id="starMessage"></p>
+    </div>
+
+    <!-- Finish screen -->
+    <div id="endGame" style="display: none">
+      <h1>🎊 GEWONNEN! 🎊</h1>
+      <p style="font-size: 20px">Um dir den Sieg zu sichern, schrei laut:</p>
+      <h2 style="font-size: 28px; margin-top: 10px">
+        🗣️ "Ouh yeeeah gibi oierlägg!"
+      </h2>
+      <p style="margin-top: 20px">
+        Wenn du cool bist, haust du jetzt nen Kurzen weg! 🏆
+      </p>
+      <p>🎉🎈🥳💥👏🕺</p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
