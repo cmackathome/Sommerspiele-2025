@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sommerspiele 2025</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
   </head>
 
   <body>
@@ -18,26 +15,16 @@
       <div class="modal-content">
         <h2>🎮 Willkommen zu Chris seinem Sommerspiel!</h2>
         <p>Passwort eingeben, dann loslegen!</p>
-        <input
-          type="password"
-          id="passwordInput"
-          placeholder="Enter password"
-          style="padding: 10px; font-size: 16px; width: 80%; margin-top: 10px"
-        />
+        <input type="password" id="passwordInput" placeholder="Enter password" style="padding: 10px; font-size: 16px; width: 80%; margin-top: 10px" />
         <br /><br />
-        <button id="startButton" onclick="startGame()" disabled>
-          Start Game
-        </button>
+        <button id="startButton" onclick="startGame()" disabled>Start Game</button>
       </div>
     </div>
 
     <!-- Button Press Game -->
     <main id="game" style="display: none">
       <h1>Aufwärmübung!</h1>
-      <p>
-        Abwechselnd die Knöpfe drücken, bei Fehler musst du neu anfangen! Ziel
-        sind <strong>69</strong>.
-      </p>
+      <p>Abwechselnd die Knöpfe drücken, bei Fehler musst du neu anfangen! Ziel sind <strong>69</strong>.</p>
       <div class="button-group">
         <button id="button1" onclick="buttonPressed(1)">Knopf 1</button>
         <button id="button2" onclick="buttonPressed(2)">Knopf 2</button>
@@ -55,9 +42,7 @@
       <p>Current Word: <span id="currentWordDisplay">_ _ _ _ _</span></p>
       <p id="wordStatus"></p>
       <div style="margin-top: 20px">
-        <button id="resetWordButton" onclick="resetWordGame()">
-          🔄 Zurücksetzen
-        </button>
+        <button id="resetWordButton" onclick="resetWordGame()">🔄 Zurücksetzen</button>
       </div>
       <audio id="wordSound" src="quiz.mp3" preload="auto"></audio>
     </div>
@@ -71,9 +56,7 @@
       </div>
       <p id="flappyStatus"></p>
       <div style="margin-top: 15px">
-        <button id="flappyRestartButton" onclick="restartFlappyGame()">
-          🔁 Neustart
-        </button>
+        <button id="flappyRestartButton" onclick="restartFlappyGame()">🔁 Neustart</button>
       </div>
       <audio id="flappySound" src="flappy.mp3" preload="auto"></audio>
     </div>
@@ -81,29 +64,10 @@
     <!-- Guess the Weight Game -->
     <div id="weightGame" style="display: none">
       <h2>⚖️ Heute wird nach Gewicht bezahlt!</h2>
-      <p>
-        Jeder Gegenstand wiegt was, gebe das Gesamtgewicht in Kilogramm an (auf
-        5kg genau).
-      </p>
-      <img
-        id="weightImage"
-        src="weight.jpeg"
-        alt="Weight Item"
-        style="
-          width: 80%;
-          max-width: 200px;
-          border-radius: 10px;
-          box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-          margin: 15px auto;
-        "
-      />
+      <p>Jeder Gegenstand wiegt was, gebe das Gesamtgewicht in Kilogramm an (auf 5kg genau).</p>
+      <img id="weightImage" src="weight.jpeg" alt="Weight Item" style="width: 80%; max-width: 200px; border-radius: 10px; box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); margin: 15px auto" />
 
-      <input
-        type="number"
-        id="weightInput"
-        placeholder="Gewicht in kg"
-        style="padding: 10px; font-size: 16px; width: 80%; max-width: 200px"
-      />
+      <input type="number" id="weightInput" placeholder="Gewicht in kg" style="padding: 10px; font-size: 16px; width: 80%; max-width: 200px" />
       <button onclick="submitWeightGuess()">Schätzen</button>
 
       <p id="weightHint" style="margin-top: 15px; font-size: 18px"></p>
@@ -114,12 +78,7 @@
     <div id="circleGame" style="display: none">
       <h2>⭕ Wer hat das ruhigste Händchen?</h2>
       <p>Zeichne einen Kreis, der minimum 92% perfekt ist!</p>
-      <canvas
-        id="circleCanvas"
-        width="300"
-        height="300"
-        style="border: 2px solid #aaa; border-radius: 8px; touch-action: none"
-      ></canvas>
+      <canvas id="circleCanvas" width="300" height="300" style="border: 2px solid #aaa; border-radius: 8px; touch-action: none"></canvas>
       <br />
       <button onclick="checkCircle()">Abschicken</button>
       <p id="circleStatus"></p>
@@ -129,7 +88,7 @@
     <!-- Rock Paper Scissors Game -->
     <div id="rpsGame" style="display: none">
       <h2>✊✋✌️ Schnigg, Schnagg, Schnugg</h2>
-      <p>Spiele den allseits beliebten klassiker, gegen den Zufall selbst!</p>
+      <p>BO5, wer zuerst 3 runden holt, gewinnt!</p>
       <div style="margin: 20px 0">
         <button onclick="playRPS('stein')">🪨 Stoi</button>
         <button onclick="playRPS('papier')">📄 Babbier</button>
@@ -142,11 +101,9 @@
     <!-- Number Sorting Game -->
     <div id="puzzleGame" style="display: none">
       <h2>🧩 Kannsu rechnen?</h2>
-      <p>
-        Jeder Knopf hat eine kleine Rechenaufgabe, das Ergebnis ist der Wert,
-        den es zu sortieren gilt. Es geht von 1 - 5!
-      </p>
+      <p>Jeder Knopf hat eine kleine Rechenaufgabe, das Ergebnis ist der Wert, den es zu sortieren gilt. Es geht von 1 - 5!</p>
       <ul id="puzzleList"></ul>
+      <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
       <p id="puzzleStatus"></p>
     </div>
 
@@ -164,37 +121,15 @@
       <p>Mit dem richtigen Winkel und der nötigen POWAH, triffst du auch!</p>
 
       <label>🎯 Winkel (Grad):</label><br />
-      <input
-        type="number"
-        id="arrowHeight"
-        min="0"
-        max="90"
-        placeholder="e.g. 45"
-      /><br /><br />
+      <input type="number" id="arrowHeight" min="0" max="90" placeholder="e.g. 45" /><br /><br />
 
       <label>💥 Stärke (0–100):</label><br />
-      <input
-        type="number"
-        id="arrowStrength"
-        min="0"
-        max="100"
-        placeholder="e.g. 60"
-      /><br /><br />
+      <input type="number" id="arrowStrength" min="0" max="100" placeholder="e.g. 60" /><br /><br />
 
       <button onclick="shootArrow()">PFzsshsh!</button>
-      <div
-        id="arrowAnimationArea"
-        style="position: relative; height: 100px; margin-top: 30px"
-      >
-        <div
-          id="arrowEmoji"
-          style="position: absolute; left: 0; top: 40px; font-size: 30px"
-        >
-          🏹
-        </div>
-        <div style="position: absolute; right: 0; top: 40px; font-size: 30px">
-          🎯
-        </div>
+      <div id="arrowAnimationArea" style="position: relative; height: 100px; margin-top: 30px">
+        <div id="arrowEmoji" style="position: absolute; left: 0; top: 40px; font-size: 30px">🏹</div>
+        <div style="position: absolute; right: 0; top: 40px; font-size: 30px">🎯</div>
       </div>
 
       <p id="arrowResult" style="margin-top: 20px; font-weight: bold"></p>
@@ -205,25 +140,10 @@
     <div id="defuseGame" style="display: none">
       <h2>💣 Entschärfe die Bombe!</h2>
       <p>EIND DRAHT MUSS DOCH ANDERS SEIN!</p>
-      <div
-        id="wireContainer"
-        style="
-          display: flex;
-          justify-content: center;
-          gap: 10px;
-          flex-wrap: wrap;
-          margin-top: 20px;
-        "
-      ></div>
+      <div id="wireContainer" style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 20px"></div>
       <p id="defuseStatus" style="margin-top: 20px; font-weight: bold"></p>
       <p id="retryCountdown" style="margin-top: 10px; font-style: italic"></p>
-      <button
-        id="retryButton"
-        onclick="retryDefuseGame()"
-        style="display: none"
-      >
-        🔁 Nochmal!
-      </button>
+      <button id="retryButton" onclick="retryDefuseGame()" style="display: none">🔁 Nochmal!</button>
       <audio id="beepSound" src="bomb-tick.mp3" preload="auto"></audio>
     </div>
 
@@ -231,12 +151,8 @@
     <div id="endGame" style="display: none">
       <h1>🎊 GEWONNEN! 🎊</h1>
       <p style="font-size: 20px">Um dir den Sieg zu sichern, schrei laut:</p>
-      <h2 style="font-size: 28px; margin-top: 10px">
-        🗣️ "Ouh yeeeah gibi oierlägg!"
-      </h2>
-      <p style="margin-top: 20px">
-        Wenn du cool bist, haust du jetzt nen Kurzen weg! 🏆
-      </p>
+      <h2 style="font-size: 28px; margin-top: 10px">🗣️ "Ouh yeeeah gibi oierlägg!"</h2>
+      <p style="margin-top: 20px">Wenn du cool bist, haust du jetzt nen Kurzen weg! 🏆</p>
       <p>🎉🎈🥳💥👏🕺</p>
       <audio id="finishSound" src="yappingmario.mp3" preload="auto"></audio>
     </div>

@@ -260,6 +260,27 @@ button:disabled {
   flex-wrap: wrap;
 }
 
+.no-select {
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Standard syntax */
+}
+
+#countdownPopup {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 1.5rem 2rem;
+  font-size: 2rem;
+  border-radius: 1rem;
+  z-index: 9999;
+  text-align: center;
+}
+
 #puzzleList li {
   background: #fff;
   padding: 20px;
