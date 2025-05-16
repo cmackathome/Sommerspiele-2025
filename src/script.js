@@ -1,6 +1,31 @@
 let counter = 0; // Game counter
 let lastPressedButton = null; // Track which button was last pressed
 let gameActive = false; // Flag to control the game state
+let sound;
+
+const gameSequence = [
+  showButtonGame,
+  showWordGame,
+  showFlappyGame,
+  showWeightGame,
+  showCircleGame,
+  showRPSGame,
+  showPuzzleGame,
+  showArcheryGame,
+  showDefuseGame,
+  showStarRatingGame,
+  showEndGame,
+];
+
+let currentGameIndex = 0;
+
+function nextGame(delay = 0) {
+  setTimeout(() => {
+    if (currentGameIndex < gameSequence.length) {
+      gameSequence[currentGameIndex++]();
+    }
+  }, delay);
+}
 
 // Function to show the welcome modal
 window.onload = function () {
@@ -15,14 +40,24 @@ document.getElementById("passwordInput").addEventListener("input", function () {
   startButton.disabled = entered !== correctPassword;
 });
 
-// Start the game when "Start Game" button is pressed
 function startGame() {
-  // Hide the welcome modal and show the game
   document.getElementById("welcomeModal").style.display = "none";
-  document.getElementById("game").style.display = "block";
+  currentGameIndex = 0;
+  nextGame(); // start with the first game
+}
 
-  // Set the game state to active
+function showButtonGame() {
+  document.getElementById("game").style.display = "block";
+  sound = document.getElementById("buttonSound");
+  sound.loop = true;
+  sound.play();
+  counter = 0;
+  lastPressedButton = null;
   gameActive = true;
+  document.getElementById("button1").disabled = false;
+  document.getElementById("button2").disabled = false;
+  document.getElementById("counterDisplay").textContent = "Zähler: 0";
+  document.getElementById("status").textContent = "";
 }
 
 // Function that handles button press
@@ -52,8 +87,11 @@ function buttonPressed(buttonNumber) {
       "Yay! Du hast die 69 geschafft!";
     document.getElementById("button1").disabled = true;
     document.getElementById("button2").disabled = true;
-
-    setTimeout(showWordGame, 5000); // Delay before showing the next game
+    sound.pause();
+    sound = document.getElementById("yeahSound");
+    sound.loop = false;
+    sound.play();
+    nextGame(5000);
   }
 }
 
@@ -64,7 +102,9 @@ let currentWord = "";
 function showWordGame() {
   document.getElementById("game").style.display = "none";
   document.getElementById("wordGame").style.display = "block";
-
+  sound = document.getElementById("wordSound");
+  sound.loop = true;
+  sound.play();
   const shuffledWord = "LERAPO";
   const shuffled = shuffledWord.split("");
   const letterContainer = document.getElementById("letterContainer");
@@ -94,7 +134,11 @@ function letterClick(letter, button) {
       document.getElementById("wordStatus").textContent =
         "🎉 Gewonnen, was eine Saufnase!";
       document.getElementById("wordStatus").style.color = "green";
-      setTimeout(showFlappyGame, 5000);
+      sound.pause();
+      sound = document.getElementById("yeahSound");
+      sound.loop = false;
+      sound.play();
+      nextGame(5000);
     } else {
       document.getElementById("wordStatus").textContent = "❌ Falsch! Sammal?";
       document.getElementById("wordStatus").style.color = "red";
@@ -127,6 +171,9 @@ let flappyAlive = true;
 function showFlappyGame() {
   document.getElementById("wordGame").style.display = "none";
   document.getElementById("flappyGame").style.display = "block";
+  sound = document.getElementById("flappySound");
+  sound.loop = true;
+  sound.play();
   document.getElementById("flappyStatus").textContent = "";
   document.getElementById("flappyRestartButton").style.display = "inline-block";
 
@@ -137,6 +184,7 @@ function showFlappyGame() {
 
   const Egg = document.getElementById("flappyEgg");
   Egg.textContent = "🥚"; // Reset to egg emoji
+  document.getElementById("flappyRestartButton").style.display = "none";
   Egg.style.top = flappyY + "px";
 
   flappyInterval = setInterval(updateFlappy, 20);
@@ -189,8 +237,11 @@ function endFlappy(won) {
       "🎉 Das Küken lebt! Und nachher retten wir auch noch den Schnaps vorm verdampfen!";
     document.getElementById("flappyStatus").style.color = "green";
     restartBtn.style.display = "none";
-
-    setTimeout(showWeightGame, 5000);
+    sound.pause();
+    sound = document.getElementById("yeahSound");
+    sound.loop = false;
+    sound.play();
+    nextGame(5000);
   } else {
     document.getElementById("flappyStatus").textContent =
       "💀 Oh man, jetzt isch's hee!";
@@ -199,6 +250,7 @@ function endFlappy(won) {
 
     // Change egg to fried egg
     Egg.textContent = "🍳";
+    restartBtn.style.display = "unset";
   }
 }
 
@@ -217,6 +269,9 @@ let attempts = 0;
 function showWeightGame() {
   document.getElementById("flappyGame").style.display = "none";
   document.getElementById("weightGame").style.display = "block";
+  sound = document.getElementById("weightSound");
+  sound.loop = true;
+  sound.play();
   document.getElementById("weightHint").textContent = "";
   document.getElementById("weightInput").value = "";
   attempts = 0;
@@ -239,7 +294,11 @@ function submitWeightGuess() {
   if (Math.abs(guess - actualWeight) <= margin) {
     hint.textContent = `🎉 Gutes Augenmaß, es sind ${actualWeight}kg.`;
     hint.style.color = "green";
-    setTimeout(showCircleGame, 5000);
+    sound.pause();
+    sound = document.getElementById("yeahSound");
+    sound.loop = false;
+    sound.play();
+    nextGame(5000);
   } else if (guess < actualWeight) {
     hint.textContent = "🔼 Sammal siehst du richtig? Es ist MEHR!";
     hint.style.color = "red";
@@ -259,6 +318,9 @@ let points = [];
 function showCircleGame() {
   document.getElementById("weightGame").style.display = "none";
   document.getElementById("circleGame").style.display = "block";
+  sound = document.getElementById("circleSound");
+  sound.loop = true;
+  sound.play();
   document.getElementById("circleStatus").textContent = "";
   points = [];
 
@@ -339,8 +401,11 @@ function checkCircle() {
       1
     )}% rund!`;
     status.style.color = "green";
-
-    setTimeout(showRPSGame, 5000);
+    sound.pause();
+    sound = document.getElementById("yeahSound");
+    sound.loop = false;
+    sound.play();
+    nextGame(5000);
   } else {
     status.textContent = `😬 Nur ${roundness.toFixed(
       1
@@ -360,6 +425,9 @@ let rpsCpuScore = 0;
 function showRPSGame() {
   document.getElementById("circleGame").style.display = "none";
   document.getElementById("rpsGame").style.display = "block";
+  sound = document.getElementById("buttonSound");
+  sound.loop = true;
+  sound.play();
   document.getElementById("rpsStatus").textContent = "Choose your move.";
   document.getElementById("rpsScore").textContent = "You: 0 | CPU: 0";
   rpsPlayerScore = 0;
@@ -393,7 +461,11 @@ function playRPS(playerChoice) {
   if (rpsPlayerScore === 3 || rpsCpuScore === 3) {
     if (rpsPlayerScore > rpsCpuScore) {
       document.getElementById("rpsStatus").textContent = "🎉 War nur Zufall!";
-      setTimeout(showPuzzleGame, 5000);
+      sound.pause();
+      sound = document.getElementById("yeahSound");
+      sound.loop = false;
+      sound.play();
+      nextGame(5000);
     } else {
       document.getElementById("rpsStatus").textContent =
         "💀 Besiegt vom Unglück, Mach nochmal!.";
@@ -405,12 +477,14 @@ function playRPS(playerChoice) {
       retryBtn.onclick = retryRPSGame;
       retryBtn.style.marginTop = "10px";
       document.getElementById("rpsGame").appendChild(retryBtn);
+      retryBtn.style.display = "block";
     }
 
     // Disable buttons
     const buttons = document.querySelectorAll("#rpsGame button");
     buttons.forEach((btn) => (btn.disabled = true));
     document.getElementById("rpsRetryBtn").disabled = false;
+    rpsRetryBtn.style.display = "unset";
   }
 }
 
@@ -419,9 +493,7 @@ function retryRPSGame() {
   document.getElementById("rpsGame").style.display = "block";
   document.getElementById("rpsStatus").textContent = "Choose your move.";
   document.getElementById("rpsScore").textContent = "You: 0 | CPU: 0";
-  document
-    .getElementById("rpsGame")
-    .removeChild(document.getElementById("rpsRetryBtn"));
+  document.getElementById("rpsGame").removeChild(document.getElementById("rpsRetryBtn"));
   rpsPlayerScore = 0;
   rpsCpuScore = 0;
   // Enable buttons
@@ -433,6 +505,9 @@ function retryRPSGame() {
 function showPuzzleGame() {
   document.getElementById("rpsGame").style.display = "none";
   document.getElementById("puzzleGame").style.display = "block";
+  sound = document.getElementById("wordSound");
+  sound.loop = true;
+  sound.play();
   document.getElementById("puzzleStatus").textContent = "";
 
   const list = document.getElementById("puzzleList");
@@ -516,8 +591,11 @@ function checkPuzzle() {
   if (isCorrect) {
     status.textContent = "🎉 Geile(r) Sortierer*innen 🥵😏!";
     status.style.color = "green";
-
-    setTimeout(showStarRatingGame, 5000);
+    sound.pause();
+    sound = document.getElementById("yeahSound");
+    sound.loop = false;
+    sound.play();
+    nextGame(5000);
   } else {
     status.textContent = "";
   }
@@ -528,7 +606,7 @@ const starContainer = document.getElementById("starContainer");
 const starMessage = document.getElementById("starMessage");
 
 function showStarRatingGame() {
-  document.getElementById("puzzleGame").style.display = "none";
+  document.getElementById("defuseGame").style.display = "none";
   document.getElementById("starGame").style.display = "block";
   for (let i = 1; i <= 5; i++) {
     const star = document.createElement("span");
@@ -551,8 +629,11 @@ function handleStarClick(index) {
   if (index === 5) {
     starMessage.textContent = "🎉 Danke für die gute Bewertung! 😏";
     starMessage.style.color = "green";
-
-    setTimeout(showEndGame, 5000);
+    sound.pause();
+    sound = document.getElementById("yeahSound");
+    sound.loop = false;
+    sound.play();
+    nextGame(5000);
   } else {
     starMessage.textContent = "😢 WAS?!! MACH MAL VERNÜNFTIG! 😤😤";
     starMessage.style.color = "red";
@@ -562,4 +643,200 @@ function handleStarClick(index) {
 function showEndGame() {
   document.getElementById("starGame").style.display = "none";
   document.getElementById("endGame").style.display = "block";
+  sound = document.getElementById("finishSound");
+  sound.play();
+}
+
+function showArcheryGame() {
+  document.getElementById("puzzleGame").style.display = "none";
+  document.getElementById("archeryGame").style.display = "block";
+  document.getElementById("arrowHeight").value = "";
+  document.getElementById("arrowStrength").value = "";
+  document.getElementById("arrowResult").textContent = "";
+}
+
+const correctHeight = 37; // target angle
+const correctStrength = 74; // target power
+const tolerance = 5;
+
+function shootArrow() {
+  const height = parseFloat(document.getElementById("arrowHeight").value);
+  const strength = parseFloat(document.getElementById("arrowStrength").value);
+  const result = document.getElementById("arrowResult");
+  const arrow = document.getElementById("arrowEmoji");
+
+  sound = document.getElementById("arrowSound");
+  sound.play();
+
+  if (isNaN(height) || isNaN(strength)) {
+    result.textContent = "❗ Geb Winkel und Stärke ein!";
+    result.style.color = "orange";
+    return;
+  }
+
+  // Reset visuals
+  arrow.style.left = "0px";
+  arrow.style.top = "40px";
+  arrow.textContent = "🏹";
+  result.textContent = "";
+
+  const heightDiff = Math.abs(height - correctHeight);
+  const strengthDiff = Math.abs(strength - correctStrength);
+  const isHit = heightDiff <= tolerance && strengthDiff <= tolerance;
+
+  const maxPos = 350;
+  let actualPos;
+
+  if (isHit) {
+    actualPos = maxPos;
+  } else {
+    // Reduce travel distance based on how far off the guess is
+    const errorScore = Math.max(heightDiff, strengthDiff);
+    const errorRatio = Math.min(errorScore / 50, 1); // cap at 1
+    actualPos = maxPos * (1 - errorRatio * 0.6); // reduce up to 60%
+  }
+
+  let pos = 0;
+  const peakHeight = height * 1.5;
+
+  const anim = setInterval(() => {
+    if (pos >= actualPos) {
+      clearInterval(anim);
+
+      if (isHit) {
+        arrow.textContent = "💥";
+        result.textContent = "🎯 Bullseye! Willhelm Tell, bisch du's?!";
+        result.style.color = "green";
+        sound.pause();
+        sound = document.getElementById("yeahSound");
+        sound.loop = false;
+        sound.play();
+        nextGame(5000);
+      } else {
+        arrow.textContent = "💨";
+        result.textContent = generateMissMessage(height, strength);
+        result.style.color = "red";
+      }
+
+      return;
+    }
+
+    pos += 10;
+    arrow.style.left = pos + "px";
+
+    const arc = Math.sin((pos / maxPos) * Math.PI) * peakHeight;
+    arrow.style.top = (40 - arc).toFixed(0) + "px";
+  }, 20);
+}
+
+function generateMissMessage(height, strength) {
+  let hint = "";
+
+  if (strength < correctStrength - 2)
+    hint += "So lahm, der hätte ja nichteinmal 'n Gummibärchen durchbohrt.";
+  else if (strength > correctStrength + 2)
+    hint += "Mach mal weniger Kraft du Möchtegern!";
+  else if (height < correctHeight - 2) hint += "Wieso zielst du auf'n Boden?.";
+  else if (height > correctHeight + 2) hint += "Puh der war zu hoch!";
+
+  return `❌ DANEBEN! ${hint}`;
+}
+
+let correctColor;
+let beepInterval;
+let retryCountdownInterval;
+
+function showDefuseGame() {
+  document.getElementById("archeryGame").style.display = "none";
+  document.getElementById("defuseGame").style.display = "block";
+
+  const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
+  const shuffledColors = colors.sort(() => 0.5 - Math.random());
+  correctColor =
+    shuffledColors[Math.floor(Math.random() * shuffledColors.length)];
+
+  const container = document.getElementById("wireContainer");
+  const status = document.getElementById("defuseStatus");
+  const retryBtn = document.getElementById("retryButton");
+  const countdownText = document.getElementById("retryCountdown");
+
+  container.innerHTML = "";
+  status.textContent = "";
+  retryBtn.style.display = "none";
+  countdownText.textContent = "";
+
+  // Start beeping
+  const beep = document.getElementById("beepSound");
+  clearInterval(beepInterval);
+  beepInterval = setInterval(() => {
+    beep.currentTime = 0;
+    beep.play();
+  }, 1000);
+
+  shuffledColors.forEach((color) => {
+    const wire = document.createElement("div");
+    wire.className = "wire";
+    wire.style.backgroundColor = color;
+
+    if (color === correctColor) {
+      wire.style.height = "24px";
+      wire.style.boxShadow = "0 0 6px rgba(255, 255, 255, 0.5)";
+    }
+
+    wire.onclick = () => {
+      if (color === correctColor) {
+        wire.textContent = "✔️";
+        status.textContent = "✅ PHEEEEEWWWWWW!";
+        status.style.color = "green";
+        clearInterval(beepInterval);
+        disableAllWires();
+        nextGame(5000);
+      } else {
+        wire.textContent = "💥";
+        status.textContent = `💣 AH FUCK! (${color}).`;
+        status.style.color = "red";
+        clearInterval(beepInterval);
+        disableAllWires();
+        startRetryCountdown();
+      }
+    };
+
+    container.appendChild(wire);
+  });
+
+  function disableAllWires() {
+    const wires = document.querySelectorAll(".wire");
+    wires.forEach((wire) => (wire.onclick = null));
+  }
+}
+
+function startRetryCountdown() {
+  const retryBtn = document.getElementById("retryButton");
+  const countdownText = document.getElementById("retryCountdown");
+  let countdown = 5;
+  retryBtn.style.display = "none";
+  countdownText.textContent = `⏳ Neuer Versuch in ${countdown}`;
+
+  clearInterval(retryCountdownInterval);
+  retryCountdownInterval = setInterval(() => {
+    countdown--;
+    if (countdown <= 0) {
+      clearInterval(retryCountdownInterval);
+      countdownText.textContent = "";
+      retryBtn.style.display = "inline-block";
+    } else {
+      countdownText.textContent = `⏳ Neuer Versuch in ${countdown}`;
+    }
+  }, 1000);
+}
+
+function retryDefuseGame() {
+  showDefuseGame();
+}
+
+function disableAllWires() {
+  const wires = document.querySelectorAll(".wire");
+  wires.forEach((wire) => {
+    wire.onclick = null;
+  });
 }

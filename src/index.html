@@ -12,6 +12,7 @@
   </head>
 
   <body>
+    <audio id="yeahSound" src="yeah.mp3" preload="auto"></audio>
     <!-- Welcome Modal -->
     <div id="welcomeModal" class="modal">
       <div class="modal-content">
@@ -44,6 +45,7 @@
 
       <p id="counterDisplay">Stand: 0</p>
       <p id="status"></p>
+      <audio id="buttonSound" src="buttongame.mp3" preload="auto"></audio>
     </main>
     <!-- Word Puzzle Game -->
     <div id="wordGame" style="display: none">
@@ -57,6 +59,7 @@
           🔄 Zurücksetzen
         </button>
       </div>
+      <audio id="wordSound" src="quiz.mp3" preload="auto"></audio>
     </div>
 
     <!-- Flappy Egg Game -->
@@ -72,6 +75,7 @@
           🔁 Neustart
         </button>
       </div>
+      <audio id="flappySound" src="flappy.mp3" preload="auto"></audio>
     </div>
 
     <!-- Guess the Weight Game -->
@@ -103,6 +107,7 @@
       <button onclick="submitWeightGuess()">Schätzen</button>
 
       <p id="weightHint" style="margin-top: 15px; font-size: 18px"></p>
+      <audio id="weightSound" src="cash.mp3" preload="auto"></audio>
     </div>
 
     <!-- Draw a Circle Game -->
@@ -118,6 +123,7 @@
       <br />
       <button onclick="checkCircle()">Abschicken</button>
       <p id="circleStatus"></p>
+      <audio id="circleSound" src="pi.mp3" preload="auto"></audio>
     </div>
 
     <!-- Rock Paper Scissors Game -->
@@ -152,6 +158,75 @@
       <p id="starMessage"></p>
     </div>
 
+    <!-- Archery Game -->
+    <div id="archeryGame" style="display: none">
+      <h2>🏹 Legolas oder Lass-das-lieber-spiel-Lego?</h2>
+      <p>Mit dem richtigen Winkel und der nötigen POWAH, triffst du auch!</p>
+
+      <label>🎯 Winkel (Grad):</label><br />
+      <input
+        type="number"
+        id="arrowHeight"
+        min="0"
+        max="90"
+        placeholder="e.g. 45"
+      /><br /><br />
+
+      <label>💥 Stärke (0–100):</label><br />
+      <input
+        type="number"
+        id="arrowStrength"
+        min="0"
+        max="100"
+        placeholder="e.g. 60"
+      /><br /><br />
+
+      <button onclick="shootArrow()">PFzsshsh!</button>
+      <div
+        id="arrowAnimationArea"
+        style="position: relative; height: 100px; margin-top: 30px"
+      >
+        <div
+          id="arrowEmoji"
+          style="position: absolute; left: 0; top: 40px; font-size: 30px"
+        >
+          🏹
+        </div>
+        <div style="position: absolute; right: 0; top: 40px; font-size: 30px">
+          🎯
+        </div>
+      </div>
+
+      <p id="arrowResult" style="margin-top: 20px; font-weight: bold"></p>
+      <audio id="arrowSound" src="arrow.mp3" preload="auto"></audio>
+    </div>
+
+    <!-- Defuse Game -->
+    <div id="defuseGame" style="display: none">
+      <h2>💣 Entschärfe die Bombe!</h2>
+      <p>EIND DRAHT MUSS DOCH ANDERS SEIN!</p>
+      <div
+        id="wireContainer"
+        style="
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+          flex-wrap: wrap;
+          margin-top: 20px;
+        "
+      ></div>
+      <p id="defuseStatus" style="margin-top: 20px; font-weight: bold"></p>
+      <p id="retryCountdown" style="margin-top: 10px; font-style: italic"></p>
+      <button
+        id="retryButton"
+        onclick="retryDefuseGame()"
+        style="display: none"
+      >
+        🔁 Nochmal!
+      </button>
+      <audio id="beepSound" src="bomb-tick.mp3" preload="auto"></audio>
+    </div>
+
     <!-- Finish screen -->
     <div id="endGame" style="display: none">
       <h1>🎊 GEWONNEN! 🎊</h1>
@@ -163,6 +238,7 @@
         Wenn du cool bist, haust du jetzt nen Kurzen weg! 🏆
       </p>
       <p>🎉🎈🥳💥👏🕺</p>
+      <audio id="finishSound" src="yappingmario.mp3" preload="auto"></audio>
     </div>
 
     <script src="script.js"></script>

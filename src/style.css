@@ -281,3 +281,49 @@ button:disabled {
   margin: 30px auto;
   max-width: 600px;
 }
+
+#archeryGame input {
+  padding: 10px;
+  font-size: 16px;
+  width: 100px;
+  margin: 5px auto;
+}
+
+#archeryGame button {
+  background: linear-gradient(45deg, #ff6a00, #ee0979);
+}
+
+#arrowAnimationArea {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 20px auto;
+}
+
+.wire {
+  width: 80px;
+  height: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.wire:hover {
+  transform: scale(1.1);
+}
+
+#retryButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-top: 10px;
+  background: linear-gradient(to right, #f12711, #f5af19);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#retryButton:hover {
+  transform: scale(1.05);
+}

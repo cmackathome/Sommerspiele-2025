@@ -2,6 +2,10 @@
 
 Small website with multiple games
 
+## Play it on Pages!
+https://cmackathome.github.io/Sommerspiele-2025/src/ </br>
+PW: geil
+
 ## Host via Termux on phone
 
 Inside Termux:
